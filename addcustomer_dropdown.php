@@ -6,16 +6,33 @@ $stmt_s = $conn->prepare($sql_select);
 $stmt_s->execute();
 
 if (isset($_POST['submit'])) {
-
     if (!empty($_POST['CustomerID']) && !empty($_POST['Name'])) {
-        // echo "<br>" . $_POST['CustomerID']
 
-        $sql = "insert into customer values(:CustomerID , :Name , 
-         :OutstandingDebt, :Email , :Birthdate ,:CountryCode )";
+        echo "<br>" . $_POST['CustomerID'] . $_POST['Name'] . $_POST['OutstandingDebt'] . $_POST['Email'] . $_POST['Birthdate'] . $_POST['CountryCode'];
+
+        $sql = "insert into customer values(:CustomerID , :Name , :Birthdate ,:Email,:CountryCode, :OutstandingDebt)";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':CustomerID', $_POST['CustomerID']);
+        $stmt->bindParam(':Name', $_POST['Name']);
+        $stmt->bindParam(':OutstandingDebt', $_POST['OutstandingDebt']);
+        $stmt->bindParam(':Email', $_POST['Email']);
+        $stmt->bindParam(':Birthdate', $_POST['Birthdate']);
+        $stmt->bindParam(':CountryCode', $_POST['CountryCode']);
+
+
+        if ($stmt->execute()):
+            $message = 'Successfully and new Customer';
+        else :
+            $message = 'Fail to add new Customer';
+        endif;
+
+        echo $message;
+        $conn = null;
     }
 }
 ?>
-<html lang="en">
+<html>
 
 <head>
     <title>User Registration DropDown</title>

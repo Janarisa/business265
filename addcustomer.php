@@ -9,7 +9,7 @@
 
 <body>
     <h1>Add Customer</h1>
-    <form action="addcustomer.php" method="POST">
+    <form action="addcustomer_dropdown.php" method="POST">
         <input type="text" placeholder="Enter Customer ID" name="CustomerID">
         <br> </br>
         <input type="text" placeholder="Enter Your Name" name="Name">
@@ -29,8 +29,9 @@
 </html>
 <?php
 if (isset($_POST['CustomerID']) && isset($_POST['Name'])):
-    // echo "<br>" . $_POST['CustomerID'] . $_POST['Name'] . $_POST['Birthdate'] .
-    //     $_POST['Email'] . $_POST['CountryCode'] . $_POST['OutstandingDebt'];
+    echo "Hello";
+    echo "<br>111" . $_POST['CustomerID'] . $_POST['Name'] . $_POST['Birthdate'] .
+        $_POST['Email'] . $_POST['CountryCode'] . $_POST['OutstandingDebt'];
 
     require "connect.php";
 
